@@ -1,10 +1,430 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
-import "./index.css";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+  <title>Ehsan Khani | Cognitive Science</title>
+
+  <meta
+    name="description"
+    content="Ehsan Khani is a Cognitive Science master's student interested in human-AI interaction, judgment, and decision-making."
+  >
+
+  <style>
+    :root {
+      --background: #f7f9fc;
+      --surface: #ffffff;
+      --primary: #173b66;
+      --accent: #2878d0;
+      --text: #182230;
+      --muted: #5f6c7b;
+      --border: #dbe3ec;
+      --shadow: 0 12px 35px rgba(23, 59, 102, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--background);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: 0 auto;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .logo {
+      color: var(--primary);
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      min-height: 78vh;
+      display: flex;
+      align-items: center;
+      padding: 90px 0;
+      background:
+        radial-gradient(circle at 85% 20%, #ddecff 0, transparent 30%),
+        linear-gradient(135deg, #ffffff 0%, #f2f7fd 100%);
+    }
+
+    .hero-content {
+      max-width: 780px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 850px;
+      margin-bottom: 22px;
+      color: var(--primary);
+      font-size: clamp(2.6rem, 7vw, 5.2rem);
+      line-height: 1.06;
+      letter-spacing: -2px;
+    }
+
+    .hero-description {
+      max-width: 700px;
+      margin-bottom: 34px;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 13px 22px;
+      border: 1px solid var(--primary);
+      border-radius: 8px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .button-primary {
+      color: #ffffff;
+      background: var(--primary);
+    }
+
+    .button-primary:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .button-secondary {
+      color: var(--primary);
+      background: transparent;
+    }
+
+    .button-secondary:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    section {
+      padding: 85px 0;
+    }
+
+    .section-title {
+      margin-bottom: 14px;
+      color: var(--primary);
+      font-size: 2rem;
+    }
+
+    .section-introduction {
+      max-width: 720px;
+      margin-bottom: 38px;
+      color: var(--muted);
+    }
+
+    .about-card {
+      padding: 35px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .about-card p + p {
+      margin-top: 14px;
+    }
+
+    .research {
+      background: #eef4fa;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      padding: 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      transition: 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      color: var(--primary);
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .contact-box {
+      padding: 45px;
+      color: #ffffff;
+      background: var(--primary);
+      border-radius: 16px;
+    }
+
+    .contact-box h2 {
+      margin-bottom: 14px;
+      font-size: 2rem;
+    }
+
+    .contact-box p {
+      max-width: 680px;
+      margin-bottom: 25px;
+      color: #dce8f5;
+    }
+
+    .contact-box .button {
+      color: var(--primary);
+      background: #ffffff;
+      border-color: #ffffff;
+    }
+
+    footer {
+      padding: 30px 0;
+      color: var(--muted);
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 800px) {
+      nav {
+        min-height: 65px;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+
+      .nav-links li:not(:last-child) {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 90px 0;
+      }
+
+      h1 {
+        letter-spacing: -1px;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-card,
+      .contact-box {
+        padding: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav class="container">
+      <a class="logo" href="#">Ehsan Khani</a>
+
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#research">Research Interests</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <span class="eyebrow">Cognitive Science · Human–AI Research</span>
+
+          <h1>Understanding human judgment in an AI-mediated world.</h1>
+
+          <p class="hero-description">
+            I am a master's student in Cognitive Science at the University
+            of Messina, interested in human–AI interaction, judgment,
+            decision-making, and behavioral research.
+          </p>
+
+          <div class="buttons">
+            <a class="button button-primary" href="#research">
+              Research Interests
+            </a>
+
+            <a class="button button-secondary" href="#contact">
+              Contact Me
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+
+        <p class="section-introduction">
+          My academic background connects psychology, cognitive science,
+          behavioral research, and emerging AI technologies.
+        </p>
+
+        <div class="about-card">
+          <p>
+            I am currently pursuing a master's degree in Cognitive Science
+            at the University of Messina. I previously studied psychology
+            and am now developing a research-oriented profile focused on
+            human interaction with artificial intelligence.
+          </p>
+
+          <p>
+            My current goals include strengthening my skills in quantitative
+            research, experimental design, Python, and scientific writing,
+            with the longer-term objective of pursuing doctoral research in
+            human-centered AI.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="research" id="research">
+      <div class="container">
+        <h2 class="section-title">Research Interests</h2>
+
+        <p class="section-introduction">
+          I am particularly interested in studying how AI systems influence
+          human reasoning, confidence, choices, and behavior.
+        </p>
+
+        <div class="card-grid">
+
+          <article class="card">
+            <h3>Human–AI Interaction</h3>
+            <p>
+              How people understand, evaluate, and collaborate with
+              AI-powered systems in real-world contexts.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Judgment, confidence, and cognitive biases.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Behavioral Experimentation</h3>
+            <p>
+              Quantitative and experimental methods for evaluating human
+              responses to intelligent and interactive technologies.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <h2>Contact</h2>
+
+          <p>
+            I am open to research collaborations, academic opportunities,
+            and conversations related to human–AI interaction and
+            decision-making.
+          </p>
+
+          <!-- Replace the email address below with your actual email. -->
+          your-email@example.com
+            Send an Email
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Ehsan Khani. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
