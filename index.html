@@ -10,29 +10,34 @@
 
   <meta
     name="description"
-    content="Ehsan Khani is a master's student in Cognitive Science interested in human-AI interaction, judgment, decision-making, and behavioral research."
+    content="Ehsan Khani is a Cognitive Science master's student exploring human judgment and decision-making in interaction with artificial intelligence."
   >
 
   <meta name="author" content="Ehsan Khani">
-  <meta name="theme-color" content="#07111f">
+  <meta name="theme-color" content="#06100f">
 
-  <title>Ehsan Khani | Cognitive Science & Human–AI Research</title>
+  <title>Ehsan Khani | Human–AI Research</title>
 
   <style>
     :root {
-      --background: #07111f;
-      --background-light: #0b1728;
-      --surface: rgba(255, 255, 255, 0.06);
-      --surface-hover: rgba(255, 255, 255, 0.1);
-      --primary: #72d6ff;
-      --secondary: #8b9cff;
-      --accent: #5ee6b3;
-      --text: #f4f8ff;
-      --muted: #a7b5c8;
-      --border: rgba(255, 255, 255, 0.12);
-      --shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
-      --radius: 22px;
-      --container: 1160px;
+      --background: #06100f;
+      --background-soft: #0a1715;
+      --surface: rgba(227, 255, 245, 0.055);
+      --surface-strong: rgba(227, 255, 245, 0.09);
+      --border: rgba(202, 255, 233, 0.14);
+      --border-strong: rgba(202, 255, 233, 0.28);
+
+      --text: #edf8f3;
+      --muted: #9aafa7;
+      --soft: #c7d7d1;
+
+      --lime: #b8ff6a;
+      --mint: #72f7ca;
+      --cyan: #68dfff;
+      --violet: #a99cff;
+
+      --container: 1220px;
+      --radius: 24px;
     }
 
     * {
@@ -43,7 +48,7 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 95px;
+      scroll-padding-top: 100px;
     }
 
     body {
@@ -52,19 +57,24 @@
       color: var(--text);
       background:
         radial-gradient(
-          circle at 15% 10%,
-          rgba(114, 214, 255, 0.12),
-          transparent 30%
+          circle at 10% 10%,
+          rgba(114, 247, 202, 0.08),
+          transparent 26%
         ),
         radial-gradient(
-          circle at 90% 20%,
-          rgba(139, 156, 255, 0.13),
-          transparent 30%
+          circle at 90% 35%,
+          rgba(104, 223, 255, 0.06),
+          transparent 27%
         ),
         var(--background);
       font-family:
-        Inter, ui-sans-serif, system-ui, -apple-system,
-        BlinkMacSystemFont, "Segoe UI", sans-serif;
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
       line-height: 1.7;
     }
 
@@ -72,20 +82,25 @@
       content: "";
       position: fixed;
       inset: 0;
-      z-index: -1;
-      opacity: 0.2;
+      z-index: -3;
       pointer-events: none;
+      opacity: 0.32;
       background-image:
         linear-gradient(
-          rgba(255, 255, 255, 0.025) 1px,
+          rgba(255, 255, 255, 0.018) 1px,
           transparent 1px
         ),
         linear-gradient(
           90deg,
-          rgba(255, 255, 255, 0.025) 1px,
+          rgba(255, 255, 255, 0.018) 1px,
           transparent 1px
         );
-      background-size: 55px 55px;
+      background-size: 72px 72px;
+      mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent 85%
+      );
     }
 
     a {
@@ -99,8 +114,31 @@
     }
 
     .container {
-      width: min(var(--container), calc(100% - 40px));
+      width: min(var(--container), calc(100% - 44px));
       margin-inline: auto;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      pointer-events: none;
+      opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
+    }
+
+    .cursor-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -2;
+      width: 500px;
+      height: 500px;
+      pointer-events: none;
+      border-radius: 50%;
+      background: rgba(114, 247, 202, 0.055);
+      filter: blur(80px);
+      transform: translate(-50%, -50%);
     }
 
     /* Navigation */
@@ -111,156 +149,165 @@
       right: 0;
       left: 0;
       z-index: 1000;
-      background: rgba(7, 17, 31, 0.78);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      background: rgba(6, 16, 15, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
     nav {
-      min-height: 76px;
-      display: flex;
+      min-height: 78px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      justify-content: space-between;
-      gap: 30px;
+      gap: 25px;
     }
 
-    .logo {
+    .identity {
       display: flex;
       align-items: center;
-      gap: 11px;
-      font-size: 1.05rem;
-      font-weight: 750;
-      letter-spacing: -0.3px;
+      gap: 12px;
+      width: fit-content;
     }
 
-    .logo-symbol {
-      width: 36px;
-      height: 36px;
+    .identity-mark {
+      position: relative;
+      width: 39px;
+      height: 39px;
       display: grid;
       place-items: center;
-      color: #07111f;
-      background: linear-gradient(
-        135deg,
-        var(--primary),
-        var(--accent)
-      );
-      border-radius: 11px;
+      color: #06100f;
+      background: var(--lime);
+      border-radius: 50%;
+      font-size: 0.82rem;
       font-weight: 900;
+    }
+
+    .identity-mark::after {
+      content: "";
+      position: absolute;
+      inset: -5px;
+      border: 1px solid rgba(184, 255, 106, 0.28);
+      border-radius: 50%;
+    }
+
+    .identity-name {
+      font-size: 0.94rem;
+      font-weight: 750;
+      letter-spacing: -0.02em;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 30px;
+      gap: 28px;
       list-style: none;
     }
 
     .nav-links a {
-      position: relative;
       color: var(--muted);
-      font-size: 0.92rem;
+      font-size: 0.83rem;
       font-weight: 650;
       transition: color 0.2s ease;
     }
 
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      bottom: -7px;
-      left: 0;
-      height: 2px;
-      background: var(--primary);
-      border-radius: 10px;
-      transform: scaleX(0);
-      transition: transform 0.2s ease;
-    }
-
-    .nav-links a:hover,
-    .nav-links a:focus-visible {
+    .nav-links a:hover {
       color: var(--text);
     }
 
-    .nav-links a:hover::after,
-    .nav-links a:focus-visible::after {
-      transform: scaleX(1);
+    .nav-action {
+      justify-self: end;
+      padding: 9px 15px;
+      color: var(--lime);
+      border: 1px solid rgba(184, 255, 106, 0.3);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 750;
+      transition:
+        color 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .nav-action:hover {
+      color: #07100e;
+      background: var(--lime);
     }
 
     /* Hero */
 
     .hero {
+      position: relative;
       min-height: 100vh;
       display: flex;
       align-items: center;
       padding: 145px 0 90px;
     }
 
-    .hero-layout {
+    .hero-grid {
+      position: relative;
       display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.6fr);
+      grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.6fr);
       align-items: center;
-      gap: 70px;
+      gap: 75px;
     }
 
-    .availability {
-      width: fit-content;
+    .hero-index {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 25px;
-      padding: 8px 14px;
-      color: #cdd8e7;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      font-size: 0.82rem;
-      font-weight: 650;
-    }
-
-    .availability-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--accent);
-      border-radius: 50%;
-      box-shadow: 0 0 15px var(--accent);
-    }
-
-    .hero-label {
-      margin-bottom: 15px;
-      color: var(--primary);
-      font-size: 0.82rem;
-      font-weight: 800;
-      letter-spacing: 0.16em;
+      gap: 13px;
+      margin-bottom: 33px;
+      color: var(--mint);
+      font-family: "Courier New", monospace;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
     }
 
-    h1 {
-      max-width: 800px;
-      margin-bottom: 25px;
-      font-size: clamp(3.3rem, 7.5vw, 6.6rem);
-      line-height: 0.98;
-      letter-spacing: -0.06em;
+    .hero-index::before {
+      content: "";
+      width: 43px;
+      height: 1px;
+      background: var(--mint);
     }
 
-    .gradient-text {
+    h1 {
+      max-width: 900px;
+      margin-bottom: 30px;
+      font-size: clamp(4rem, 9vw, 8.5rem);
+      font-weight: 720;
+      line-height: 0.88;
+      letter-spacing: -0.075em;
+    }
+
+    .outlined {
       color: transparent;
-      background: linear-gradient(
-        100deg,
-        var(--primary),
-        var(--secondary),
-        var(--accent)
-      );
-      background-clip: text;
-      -webkit-background-clip: text;
+      -webkit-text-stroke: 1px rgba(237, 248, 243, 0.65);
+    }
+
+    .accent-word {
+      position: relative;
+      display: inline-block;
+      color: var(--lime);
+    }
+
+    .accent-word::after {
+      content: "";
+      position: absolute;
+      right: 2%;
+      bottom: -7px;
+      left: 2%;
+      height: 5px;
+      background: var(--lime);
+      transform: rotate(-1deg);
+      opacity: 0.65;
     }
 
     .hero-description {
       max-width: 720px;
-      margin-bottom: 36px;
+      margin-bottom: 37px;
       color: var(--muted);
       font-size: clamp(1.05rem, 2vw, 1.24rem);
-      line-height: 1.8;
     }
 
     .hero-description strong {
@@ -268,547 +315,749 @@
       font-weight: 650;
     }
 
-    .buttons {
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
+      align-items: center;
+      gap: 15px;
     }
 
-    .button {
-      min-height: 52px;
+    .primary-button,
+    .secondary-button {
+      min-height: 54px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 9px;
+      gap: 12px;
       padding: 13px 22px;
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      font-size: 0.94rem;
+      border-radius: 100px;
+      font-size: 0.9rem;
       font-weight: 750;
       transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        border-color 0.2s ease;
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease;
     }
 
-    .button:hover {
+    .primary-button {
+      color: #06100f;
+      background: var(--lime);
+      border: 1px solid var(--lime);
+    }
+
+    .secondary-button {
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .primary-button:hover,
+    .secondary-button:hover {
       transform: translateY(-3px);
     }
 
-    .button-primary {
-      color: #05111e;
-      background: linear-gradient(
-        135deg,
-        var(--primary),
-        var(--accent)
-      );
-      border-color: transparent;
-      box-shadow: 0 12px 35px rgba(94, 230, 179, 0.15);
+    .secondary-button:hover {
+      border-color: var(--border-strong);
+      background: var(--surface-strong);
     }
 
-    .button-secondary {
-      color: var(--text);
-      background: var(--surface);
-    }
+    /* Neural visual */
 
-    .button-secondary:hover {
-      background: var(--surface-hover);
-      border-color: rgba(114, 214, 255, 0.45);
-    }
-
-    .profile-visual {
+    .neural-panel {
       position: relative;
-      min-height: 410px;
-      display: grid;
-      place-items: center;
-    }
-
-    .orbit {
-      position: absolute;
-      border: 1px solid rgba(114, 214, 255, 0.2);
-      border-radius: 50%;
-      animation: rotate 18s linear infinite;
-    }
-
-    .orbit-one {
-      width: 330px;
-      height: 330px;
-    }
-
-    .orbit-two {
-      width: 255px;
-      height: 255px;
-      animation-direction: reverse;
-      animation-duration: 13s;
-    }
-
-    .orbit-dot {
-      position: absolute;
-      top: 50%;
-      left: -5px;
-      width: 10px;
-      height: 10px;
-      background: var(--primary);
-      border-radius: 50%;
-      box-shadow: 0 0 20px var(--primary);
-    }
-
-    .profile-card {
-      position: relative;
-      z-index: 2;
-      width: 230px;
-      height: 270px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 30px;
-      text-align: center;
+      min-height: 520px;
+      overflow: hidden;
       background:
-        linear-gradient(
-          145deg,
-          rgba(255, 255, 255, 0.12),
-          rgba(255, 255, 255, 0.04)
+        radial-gradient(
+          circle at center,
+          rgba(114, 247, 202, 0.08),
+          transparent 55%
         );
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: 32px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(15px);
-      transform: rotate(2deg);
+      border: 1px solid var(--border);
+      border-radius: 180px 180px 26px 26px;
     }
 
-    .initials {
-      width: 100px;
-      height: 100px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 22px;
-      color: #07111f;
-      background: linear-gradient(
-        135deg,
-        var(--primary),
-        var(--secondary)
-      );
-      border-radius: 28px;
-      font-size: 2rem;
-      font-weight: 850;
-      box-shadow: 0 20px 50px rgba(114, 214, 255, 0.2);
+    #network {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
     }
 
-    .profile-card strong {
-      display: block;
-      margin-bottom: 5px;
-      font-size: 1.05rem;
-    }
-
-    .profile-card span {
+    .panel-label {
+      position: absolute;
+      top: 26px;
+      left: 26px;
+      z-index: 2;
       color: var(--muted);
-      font-size: 0.85rem;
-    }
-
-    @keyframes rotate {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* General sections */
-
-    section {
-      padding: 105px 0;
-    }
-
-    .section-tag {
-      display: block;
-      margin-bottom: 12px;
-      color: var(--accent);
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.15em;
+      font-family: "Courier New", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
     }
 
-    .section-heading {
-      max-width: 790px;
-      margin-bottom: 22px;
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
-      line-height: 1.15;
-      letter-spacing: -0.04em;
+    .panel-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 2;
+      width: 140px;
+      height: 140px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background: rgba(6, 16, 15, 0.68);
+      border: 1px solid rgba(184, 255, 106, 0.35);
+      border-radius: 50%;
+      backdrop-filter: blur(14px);
+      transform: translate(-50%, -50%);
+      box-shadow:
+        0 0 0 13px rgba(184, 255, 106, 0.025),
+        0 0 60px rgba(114, 247, 202, 0.13);
     }
 
-    .section-introduction {
-      max-width: 760px;
-      margin-bottom: 50px;
+    .panel-center span {
+      display: block;
+      color: var(--lime);
+      font-family: "Courier New", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .panel-center strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 1rem;
+    }
+
+    .panel-footer {
+      position: absolute;
+      right: 24px;
+      bottom: 24px;
+      left: 24px;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
       color: var(--muted);
-      font-size: 1.08rem;
+      font-family: "Courier New", monospace;
+      font-size: 0.65rem;
+    }
+
+    .scroll-marker {
+      position: absolute;
+      bottom: 35px;
+      left: 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transform: rotate(-90deg);
+      transform-origin: left center;
+    }
+
+    .scroll-marker::before {
+      content: "";
+      width: 43px;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    /* Shared sections */
+
+    section {
+      padding: 120px 0;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 45px;
+      margin-bottom: 65px;
+    }
+
+    .section-number {
+      padding-top: 12px;
+      color: var(--lime);
+      font-family: "Courier New", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+    }
+
+    .section-title {
+      max-width: 920px;
+      font-size: clamp(2.7rem, 6vw, 5.8rem);
+      font-weight: 650;
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .section-title em {
+      color: var(--muted);
+      font-family: Georgia, serif;
+      font-weight: 400;
     }
 
     /* About */
 
-    .about-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
+    .about {
+      border-top: 1px solid var(--border);
     }
 
-    .glass-card {
-      padding: 36px;
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+    }
+
+    .about-main {
+      position: relative;
+      overflow: hidden;
+      min-height: 430px;
+      padding: 45px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
     }
 
-    .glass-card p {
-      color: var(--muted);
+    .about-main::after {
+      content: "COGNITION";
+      position: absolute;
+      right: -20px;
+      bottom: -35px;
+      color: rgba(255, 255, 255, 0.018);
+      font-size: 7rem;
+      font-weight: 900;
+      letter-spacing: -0.07em;
     }
 
-    .glass-card p + p {
-      margin-top: 18px;
+    .about-main p {
+      position: relative;
+      z-index: 1;
+      max-width: 740px;
+      color: var(--soft);
+      font-size: clamp(1.12rem, 2vw, 1.45rem);
+      line-height: 1.8;
     }
 
-    .glass-card strong {
-      color: var(--text);
+    .about-main p + p {
+      margin-top: 23px;
     }
 
-    .facts {
+    .about-main strong {
+      color: var(--lime);
+      font-weight: 650;
+    }
+
+    .about-side {
       display: grid;
       gap: 15px;
     }
 
-    .fact {
-      display: flex;
-      align-items: flex-start;
-      gap: 17px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.035);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-    }
-
-    .fact-icon {
-      min-width: 42px;
-      height: 42px;
+    .information-row {
+      min-height: 95px;
       display: grid;
-      place-items: center;
-      color: var(--primary);
-      background: rgba(114, 214, 255, 0.1);
-      border-radius: 12px;
-      font-size: 1.1rem;
+      grid-template-columns: 48px 1fr;
+      align-items: center;
+      gap: 18px;
+      padding: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      transition:
+        border-color 0.25s ease,
+        transform 0.25s ease;
     }
 
-    .fact h3 {
-      margin-bottom: 3px;
-      font-size: 0.97rem;
+    .information-row:hover {
+      border-color: var(--border-strong);
+      transform: translateX(5px);
     }
 
-    .fact p {
+    .information-index {
+      color: var(--lime);
+      font-family: "Courier New", monospace;
+      font-size: 0.7rem;
+    }
+
+    .information-row small {
+      display: block;
+      margin-bottom: 4px;
       color: var(--muted);
-      font-size: 0.89rem;
+      font-size: 0.71rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
 
-    /* Research */
+    .information-row strong {
+      font-size: 0.95rem;
+      font-weight: 650;
+    }
 
-    .research-section {
-      background: rgba(255, 255, 255, 0.018);
+    /* Research questions */
+
+    .questions {
+      background: var(--background-soft);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
 
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
+    .question-list {
+      border-top: 1px solid var(--border);
     }
 
-    .research-card {
-      position: relative;
-      overflow: hidden;
-      min-height: 275px;
-      padding: 30px;
+    .question {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      align-items: center;
+      gap: 35px;
+      min-height: 150px;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--border);
+      transition: padding 0.25s ease;
+    }
+
+    .question:hover {
+      padding-right: 20px;
+      padding-left: 20px;
+    }
+
+    .question-number {
+      color: var(--lime);
+      font-family: "Courier New", monospace;
+      font-size: 0.74rem;
+    }
+
+    .question h3 {
+      max-width: 890px;
+      font-size: clamp(1.45rem, 3vw, 2.35rem);
+      font-weight: 520;
+      line-height: 1.35;
+      letter-spacing: -0.035em;
+    }
+
+    .question-arrow {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      color: var(--lime);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      font-size: 1.2rem;
+      transition:
+        color 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease;
+    }
+
+    .question:hover .question-arrow {
+      color: #06100f;
+      background: var(--lime);
+      transform: rotate(45deg);
+    }
+
+    /* Focus */
+
+    .focus-layout {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 28px;
+    }
+
+    .focus-statement {
+      min-height: 560px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 42px;
+      background: var(--lime);
+      border-radius: var(--radius);
+      color: #06100f;
+    }
+
+    .focus-statement small {
+      font-family: "Courier New", monospace;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .focus-statement h3 {
+      font-size: clamp(2.2rem, 5vw, 4.8rem);
+      font-weight: 670;
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+    }
+
+    .focus-statement p {
+      max-width: 480px;
+      font-size: 0.97rem;
+      font-weight: 540;
+    }
+
+    .capability-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .capability {
+      min-height: 270px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 29px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        background 0.25s ease;
+        background 0.25s ease,
+        transform 0.25s ease;
     }
 
-    .research-card::before {
+    .capability:hover {
+      background: var(--surface-strong);
+      transform: translateY(-5px);
+    }
+
+    .capability-marker {
+      width: 10px;
+      height: 10px;
+      background: var(--capability-color);
+      border-radius: 50%;
+      box-shadow: 0 0 18px var(--capability-color);
+    }
+
+    .capability h3 {
+      margin-bottom: 9px;
+      font-size: 1.15rem;
+    }
+
+    .capability p {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .capability:nth-child(1) {
+      --capability-color: var(--mint);
+    }
+
+    .capability:nth-child(2) {
+      --capability-color: var(--cyan);
+    }
+
+    .capability:nth-child(3) {
+      --capability-color: var(--violet);
+    }
+
+    .capability:nth-child(4) {
+      --capability-color: var(--lime);
+    }
+
+    /* Roadmap */
+
+    .roadmap {
+      border-top: 1px solid var(--border);
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .timeline::before {
       content: "";
       position: absolute;
-      top: -70px;
-      right: -70px;
-      width: 160px;
-      height: 160px;
-      background: var(--card-color);
-      border-radius: 50%;
-      opacity: 0.08;
-      filter: blur(5px);
+      top: 14px;
+      right: 0;
+      left: 0;
+      height: 1px;
+      background: var(--border-strong);
     }
 
-    .research-card:hover {
-      background: var(--surface-hover);
-      border-color: color-mix(
-        in srgb,
-        var(--card-color) 45%,
-        transparent
-      );
-      transform: translateY(-8px);
-    }
-
-    .card-number {
-      display: block;
-      margin-bottom: 45px;
-      color: var(--card-color);
-      font-size: 0.78rem;
-      font-weight: 850;
-      letter-spacing: 0.13em;
-    }
-
-    .research-card h3 {
-      margin-bottom: 13px;
-      font-size: 1.26rem;
-    }
-
-    .research-card p {
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .card-one {
-      --card-color: #72d6ff;
-    }
-
-    .card-two {
-      --card-color: #8b9cff;
-    }
-
-    .card-three {
-      --card-color: #5ee6b3;
-    }
-
-    /* Current direction */
-
-    .direction-box {
+    .timeline-item {
       position: relative;
-      overflow: hidden;
-      padding: 50px;
-      background:
-        linear-gradient(
-          135deg,
-          rgba(114, 214, 255, 0.1),
-          rgba(139, 156, 255, 0.08)
-        );
-      border: 1px solid rgba(114, 214, 255, 0.22);
-      border-radius: 28px;
+      padding: 55px 30px 0 0;
     }
 
-    .direction-box::after {
-      content: "AI";
+    .timeline-item::before {
+      content: "";
       position: absolute;
-      right: 35px;
-      bottom: -65px;
-      color: rgba(255, 255, 255, 0.025);
-      font-size: 12rem;
-      font-weight: 900;
-      line-height: 1;
+      top: 8px;
+      left: 0;
+      width: 13px;
+      height: 13px;
+      background: var(--background);
+      border: 2px solid var(--lime);
+      border-radius: 50%;
+      box-shadow: 0 0 0 7px rgba(184, 255, 106, 0.05);
     }
 
-    .direction-box h2 {
-      position: relative;
-      z-index: 1;
-      max-width: 850px;
-      margin-bottom: 20px;
-      font-size: clamp(2rem, 5vw, 3.3rem);
-      line-height: 1.2;
-      letter-spacing: -0.04em;
+    .timeline-label {
+      display: block;
+      margin-bottom: 16px;
+      color: var(--lime);
+      font-family: "Courier New", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
-    .direction-box p {
-      position: relative;
-      z-index: 1;
-      max-width: 780px;
-      color: var(--muted);
+    .timeline-item h3 {
+      margin-bottom: 10px;
       font-size: 1.05rem;
     }
 
-    .skill-list {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 30px;
-    }
-
-    .skill {
-      padding: 9px 14px;
-      color: #dce8f8;
-      background: rgba(7, 17, 31, 0.55);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      font-size: 0.82rem;
-      font-weight: 650;
+    .timeline-item p {
+      max-width: 240px;
+      color: var(--muted);
+      font-size: 0.86rem;
     }
 
     /* Contact */
 
     .contact {
-      padding-top: 60px;
+      padding-bottom: 70px;
     }
 
-    .contact-box {
-      display: grid;
-      grid-template-columns: 1fr auto;
+    .contact-panel {
+      position: relative;
+      overflow: hidden;
+      min-height: 540px;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 50px;
-      padding: 55px;
-      background: linear-gradient(
-        135deg,
-        #132b47,
-        #15233c
-      );
-      border: 1px solid rgba(114, 214, 255, 0.2);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
+      justify-content: center;
+      padding: 70px 35px;
+      text-align: center;
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(184, 255, 106, 0.14),
+          transparent 45%
+        ),
+        var(--background-soft);
+      border: 1px solid var(--border);
+      border-radius: 34px;
     }
 
-    .contact-box h2 {
-      margin-bottom: 15px;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      line-height: 1.15;
-      letter-spacing: -0.04em;
+    .contact-panel::before,
+    .contact-panel::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(184, 255, 106, 0.13);
+      border-radius: 50%;
     }
 
-    .contact-box p {
-      max-width: 690px;
-      color: #b8c6d8;
+    .contact-panel::before {
+      width: 600px;
+      height: 600px;
     }
 
-    .contact-button {
-      white-space: nowrap;
+    .contact-panel::after {
+      width: 400px;
+      height: 400px;
+    }
+
+    .contact-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-label {
+      display: block;
+      margin-bottom: 25px;
+      color: var(--lime);
+      font-family: "Courier New", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .contact-panel h2 {
+      max-width: 850px;
+      margin: 0 auto 25px;
+      font-size: clamp(3rem, 7vw, 7rem);
+      font-weight: 650;
+      line-height: 0.98;
+      letter-spacing: -0.07em;
+    }
+
+    .contact-panel p {
+      max-width: 660px;
+      margin: 0 auto 35px;
+      color: var(--muted);
+      font-size: 1rem;
     }
 
     /* Footer */
 
     footer {
-      padding: 35px 0;
-      color: var(--muted);
+      padding: 33px 0;
       border-top: 1px solid var(--border);
-      font-size: 0.86rem;
     }
 
-    .footer-content {
+    .footer-layout {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 25px;
+      color: var(--muted);
+      font-size: 0.78rem;
     }
 
     .footer-links {
       display: flex;
-      gap: 20px;
+      gap: 22px;
     }
 
     .footer-links a:hover {
-      color: var(--primary);
+      color: var(--lime);
     }
 
-    /* Accessibility */
+    /* Reveal animations */
 
-    :focus-visible {
-      outline: 3px solid rgba(114, 214, 255, 0.65);
-      outline-offset: 4px;
-      border-radius: 4px;
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
     }
 
-    /* Responsive design */
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-    @media (max-width: 900px) {
-      .hero-layout {
-        grid-template-columns: 1fr;
-        gap: 45px;
+    /* Responsive */
+
+    @media (max-width: 980px) {
+      nav {
+        grid-template-columns: 1fr auto;
       }
 
-      .profile-visual {
+      .nav-links {
         display: none;
       }
 
-      .about-layout {
+      .hero-grid,
+      .about-grid,
+      .focus-layout {
         grid-template-columns: 1fr;
       }
 
-      .card-grid {
+      .neural-panel {
+        min-height: 450px;
+        border-radius: 30px;
+      }
+
+      .section-header {
         grid-template-columns: 1fr;
+        gap: 15px;
       }
 
-      .research-card {
-        min-height: auto;
+      .timeline {
+        grid-template-columns: 1fr 1fr;
+        gap: 45px;
       }
 
-      .card-number {
-        margin-bottom: 30px;
-      }
-
-      .contact-box {
-        grid-template-columns: 1fr;
-      }
-
-      .contact-button {
-        width: fit-content;
+      .timeline::before {
+        display: none;
       }
     }
 
     @media (max-width: 680px) {
       .container {
-        width: min(100% - 28px, var(--container));
+        width: min(var(--container), calc(100% - 28px));
+      }
+
+      header {
+        position: absolute;
       }
 
       nav {
-        min-height: 68px;
+        min-height: 70px;
       }
 
-      .nav-links li:not(:last-child) {
-        display: none;
+      .nav-action {
+        padding: 8px 12px;
+        font-size: 0.72rem;
       }
 
       .hero {
         min-height: auto;
-        padding: 125px 0 75px;
-      }
-
-      section {
-        padding: 78px 0;
+        padding: 125px 0 80px;
       }
 
       h1 {
-        font-size: clamp(3rem, 16vw, 4.7rem);
+        font-size: clamp(3.4rem, 19vw, 5.5rem);
       }
 
-      .glass-card,
-      .direction-box,
-      .contact-box {
+      section {
+        padding: 85px 0;
+      }
+
+      .neural-panel {
+        min-height: 390px;
+      }
+
+      .scroll-marker {
+        display: none;
+      }
+
+      .about-main {
         padding: 28px;
       }
 
-      .buttons {
-        flex-direction: column;
+      .question {
+        grid-template-columns: 45px 1fr;
+        gap: 14px;
+        min-height: 130px;
       }
 
-      .button {
-        width: 100%;
+      .question-arrow {
+        display: none;
       }
 
-      .contact-button {
-        width: 100%;
+      .focus-statement {
+        min-height: 430px;
+        padding: 29px;
       }
 
-      .footer-content {
+      .capability-grid,
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item {
+        padding-top: 42px;
+      }
+
+      .contact-panel {
+        min-height: 500px;
+        padding: 55px 23px;
+      }
+
+      .footer-layout {
         flex-direction: column;
         align-items: flex-start;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .primary-button,
+      .secondary-button {
+        width: 100%;
       }
     }
 
@@ -820,8 +1069,7 @@
       *,
       *::before,
       *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
+        animation: none !important;
         transition-duration: 0.01ms !important;
       }
     }
@@ -830,31 +1078,27 @@
 
 <body>
 
+  <div class="noise"></div>
+  <div class="cursor-glow" id="cursor-glow"></div>
+
   <header>
     <nav class="container" aria-label="Main navigation">
 
-      <a class="logo" href="#home" aria-label="Ehsan Khani homepage">
-        <span class="logo-symbol">EK</span>
-        <span>Ehsan Khani</span>
+      <a class="identity" href="#home">
+        <span class="identity-mark">EK</span>
+        <span class="identity-name">Ehsan Khani</span>
       </a>
 
       <ul class="nav-links">
-        <li>
-          <a href="#about">About</a>
-        </li>
-
-        <li>
-          <a href="#research">Research</a>
-        </li>
-
-        <li>
-          <a href="#direction">Direction</a>
-        </li>
-
-        <li>
-          <a href="#contact">Contact</a>
-        </li>
+        <li><a href="#about">Profile</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#focus">Focus</a></li>
+        <li><a href="#roadmap">Trajectory</a></li>
       </ul>
+
+      <a class="nav-action" href="#contact">
+        Start a conversation
+      </a>
 
     </nav>
   </header>
@@ -862,31 +1106,584 @@
   <main>
 
     <section class="hero" id="home">
-      <div class="container hero-layout">
+      <div class="container hero-grid">
 
-        <div class="hero-content">
+        <div class="hero-copy">
 
-          <div class="availability">
-            <span class="availability-dot"></span>
-            Building a research profile in Human–AI Interaction
-          </div>
-
-          <p class="hero-label">
-            Cognitive Science · Behavioral Research
+          <p class="hero-index">
+            Human cognition in AI-mediated environments
           </p>
 
           <h1>
-            Ehsan
-            <span class="gradient-text">Khani.</span>
+            Human
+            <span class="outlined">judgment,</span>
+            augmented by
+            <span class="accent-word">AI.</span>
           </h1>
 
           <p class="hero-description">
-            Master's student in <strong>Cognitive Science</strong> at the
-            University of Messina, exploring how artificial intelligence
-            influences human judgment, decision-making, confidence,
-            and behavior.
+            I am <strong>Ehsan Khani</strong>, a master's student in
+            Cognitive Science at the University of Messina. My developing
+            research direction examines how artificial intelligence changes
+            human judgment, confidence, reliance, and decision-making.
           </p>
 
-          <div class="buttons">
+          <div class="hero-actions">
 
-            <a 
+            <a class="primary-button" href="#questions">
+              Explore the questions
+              <span aria-hidden="true">↓</span>
+            </a>
+
+            <a
+              class="secondary-button"
+              href="https://github.com/ek-webspace"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Visit GitHub
+              <span aria-hidden="true">↗</span>
+            </a>
+
+          </div>
+        </div>
+
+        <div class="neural-panel">
+
+          <span class="panel-label">
+            Cognitive system / live model
+          </span>
+
+          <canvas id="network"></canvas>
+
+          <div class="panel-center">
+            <div>
+              <span>Research axis</span>
+              <strong> to explore</div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="container">
+
+        <div class="section-header reveal">
+
+          <span class="section-number">
+            01 / PROFILE
+          </span>
+
+          <h2 class="section-title">
+            Psychology as a foundation.
+            <em>Cognitive science</em> as a bridge.
+            Human–AI research as a direction.
+          </h2>
+
+        </div>
+
+        <div class="about-grid">
+
+          <article class="about-main reveal">
+
+            <p>
+              My academic background began in
+              <strong>psychology</strong> and developed into an
+              interdisciplinary interest in cognition, behavior, and
+              intelligent technology.
+            </p>
+
+            <p>
+              I am currently studying Cognitive Science at the
+              University of Messina while building the methodological
+              foundation required for quantitative and experimental
+              research.
+            </p>
+
+            <p>
+              The central theme connecting my interests is simple:
+              understanding what happens when human reasoning meets
+              an increasingly capable artificial system.
+            </p>
+
+          </article>
+
+          <aside class="about-side">
+
+            <div class="information-row reveal">
+              <span class="information-index">01</span>
+              <div>
+                <small>Current degree</small>
+                <strong>MSc in Cognitive Science</strong>
+              </div>
+            </div>
+
+            <div class="information-row reveal">
+              <span class="information-index">02</span>
+              <div>
+                <small>Institution</small>
+                <strong>University of Messina, Italy</strong>
+              </div>
+            </div>
+
+            <div class="information-row reveal">
+              <span class="information-index">03</span>
+              <div>
+                <small>Academic foundation</small>
+                <strong>Psychology and Cognitive Science</strong>
+              </div>
+            </div>
+
+            <div class="information-row reveal">
+              <span class="information-index">04</span>
+              <div>
+                <small>Primary direction</small>
+                <strong>Human Judgment and Decision-Making with AI</strong>
+              </div>
+            </div>
+
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="questions" id="questions">
+      <div class="container">
+
+        <div class="section-header reveal">
+
+          <span class="section-number">
+            02 / QUESTIONS
+          </span>
+
+          <h2 class="section-title">
+            The questions that
+            <em>shape</em> my direction.
+          </h2>
+
+        </div>
+
+        <div class="question-list">
+
+          <article class="question reveal">
+            <span class="question-number">Q.01</span>
+
+            <h3>
+              When does AI advice improve human judgment, and when does it
+              create inappropriate reliance?
+            </h3>
+
+            <span class="question-arrow" aria-hidden="true">↗</span>
+          </article>
+
+          <article class="question reveal">
+            <span class="question-number">Q.02</span>
+
+            <h3>
+              How do interface design and explanation change confidence,
+              trust, and decision quality?
+            </h3>
+
+            <span class="question-arrow" aria-hidden="true">↗</span>
+          </article>
+
+          <article class="question reveal">
+            <span class="question-number">Q.03</span>
+
+            <h3>
+              How should people evaluate uncertain, persuasive, or
+              conflicting outputs produced by AI systems?
+            </h3>
+
+            <span class="question-arrow" aria-hidden="true">↗</span>
+          </article>
+
+          <article class="question reveal">
+            <span class="question-number">Q.04</span>
+
+            <h3>
+              Which individual and contextual factors support effective
+              human–AI collaboration?
+            </h3>
+
+            <span class="question-arrow" aria-hidden="true">↗</span>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="focus">
+      <div class="container">
+
+        <div class="section-header reveal">
+
+          <span class="section-number">
+            03 / CURRENT FOCUS
+          </span>
+
+          <h2 class="section-title">
+            Building the tools behind
+            <em>credible</em> research.
+          </h2>
+
+        </div>
+
+        <div class="focus-layout">
+
+          <article class="focus-statement reveal">
+
+            <small>Current objective</small>
+
+            <h3>
+              From research interest to research capability.
+            </h3>
+
+            <p>
+              The current priority is developing a rigorous and reproducible
+              workflow for asking behavioral questions, collecting evidence,
+              analyzing data, and communicating results.
+            </p>
+
+          </article>
+
+          <div class="capability-grid">
+
+            <article class="capability reveal">
+              <span class="capability-marker"></span>
+
+              <div>
+                <h3>Experimental Design</h3>
+
+                <p>
+                  Developing testable questions, operational definitions,
+                  controlled comparisons, and interpretable outcome measures.
+                </p>
+              </div>
+            </article>
+
+            <article class="capability reveal">
+              <span class="capability-marker"></span>
+
+              <div>
+                <h3>Python and Data Analysis</h3>
+
+                <p>
+                  Building a Python-first workflow for data processing,
+                  analysis, visualization, and reproducible research.
+                </p>
+              </div>
+            </article>
+
+            <article class="capability reveal">
+              <span class="capability-marker"></span>
+
+              <div>
+                <h3>Behavioral Measurement</h3>
+
+                <p>
+                  Studying decisions, confidence, response patterns,
+                  reliance, and other observable indicators of cognition.
+                </p>
+              </div>
+            </article>
+
+            <article class="capability reveal">
+              <span class="capability-marker"></span>
+
+              <div>
+                <h3>Scientific Communication</h3>
+
+                <p>
+                  Strengthening literature synthesis, scientific writing,
+                  transparent reporting, and research presentation.
+                </p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="roadmap" id="roadmap">
+      <div class="container">
+
+        <div class="section-header reveal">
+
+          <span class="section-number">
+            04 / TRAJECTORY
+          </span>
+
+          <h2 class="section-title">
+            A developing research
+            <em>trajectory.</em>
+          </h2>
+
+        </div>
+
+        <div class="timeline">
+
+          <article class="timeline-item reveal">
+            <span class="timeline-label">Foundation</span>
+
+            <h3>Psychology</h3>
+
+            <p>
+              A foundation in human behavior, cognition, and psychological
+              theory.
+            </p>
+          </article>
+
+          <article class="timeline-item reveal">
+            <span class="timeline-label">Current stage</span>
+
+            <h3>Cognitive Science</h3>
+
+            <p>
+              Interdisciplinary training across cognition, technology,
+              language, philosophy, and computational methods.
+            </p>
+          </article>
+
+          <article class="timeline-item reveal">
+            <span class="timeline-label">Development</span>
+
+            <h3>Research Practice</h3>
+
+            <p>
+              Building skills in experimentation, Python, quantitative
+              analysis, reproducibility, and scientific writing.
+            </p>
+          </article>
+
+          <article class="timeline-item reveal">
+            <span class="timeline-label">Long-term direction</span>
+
+            <h3>Human–AI PhD Research</h3>
+
+            <p>
+              Pursuing doctoral research on human judgment and
+              decision-making with artificial intelligence.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container">
+
+        <div class="contact-panel reveal">
+
+          <div class="contact-content">
+
+            <span class="contact-label">
+              Contact / collaboration
+            </span>
+
+            <h2>
+              Let’s examine how humans think with AI.
+            </h2>
+
+            <p>
+              I am open to conversations about research opportunities,
+              interdisciplinary projects, traineeships, and collaborations
+              related to Human–AI Interaction and decision-making.
+            </p>
+
+            <!-- Replace this address with your actual email address. -->
+            your-email@example.com
+              Send an email
+              <span aria-hidden="true">↗</span>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-layout">
+
+      <p>
+        © <span id="year"></span> Ehsan Khani
+      </p>
+
+      <p>
+        Cognitive Science · Human–AI Research
+      </p>
+
+      <div class="footer-links">
+
+        https://github.com/ek-webspace
+          GitHub ↗
+        </a>
+
+        #home
+          Back to top ↑
+        </a>
+
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    const cursorGlow = document.getElementById("cursor-glow");
+
+    window.addEventListener("mousemove", (event) => {
+      cursorGlow.style.left = event.clientX + "px";
+      cursorGlow.style.top = event.clientY + "px";
+    });
+
+    const revealElements =
+      document.querySelectorAll(".reveal");
+
+    const revealObserver =
+      new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+    revealElements.forEach((element) => {
+      revealObserver.observe(element);
+    });
+
+    const canvas = document.getElementById("network");
+    const context = canvas.getContext("2d");
+    const neuralPanel = canvas.parentElement;
+
+    let particles = [];
+    let animationFrame;
+
+    function resizeCanvas() {
+      const pixelRatio = window.devicePixelRatio || 1;
+      const rect = neuralPanel.getBoundingClientRect();
+
+      canvas.width = rect.width * pixelRatio;
+      canvas.height = rect.height * pixelRatio;
+
+      canvas.style.width = rect.width + "px";
+      canvas.style.height = rect.height + "px";
+
+      context.setTransform(
+        pixelRatio,
+        0,
+        0,
+        pixelRatio,
+        0,
+        0
+      );
+
+      createParticles(rect.width, rect.height);
+    }
+
+    function createParticles(width, height) {
+      const count = width < 500 ? 28 : 42;
+
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.8 + 1,
+        speedX: (Math.random() - 0.5) * 0.32,
+        speedY: (Math.random() - 0.5) * 0.32
+      }));
+    }
+
+    function drawNetwork() {
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
+
+      context.clearRect(0, 0, width, height);
+
+      particles.forEach((particle) => {
+        particle.x += particle.speedX;
+        particle.y += particle.speedY;
+
+        if (particle.x < 0 || particle.x > width) {
+          particle.speedX *= -1;
+        }
+
+        if (particle.y < 0 || particle.y > height) {
+          particle.speedY *= -1;
+        }
+
+        context.beginPath();
+        context.arc(
+          particle.x,
+          particle.y,
+          particle.radius,
+          0,
+          Math.PI * 2
+        );
+
+        context.fillStyle = "rgba(184, 255, 106, 0.75)";
+        context.fill();
+      });
+
+      for (let first = 0; first < particles.length; first++) {
+        for (
+          let second = first + 1;
+          second < particles.length;
+          second++
+        ) {
+          const deltaX =
+            particles[first].x - particles[second].x;
+
+          const deltaY =
+            particles[first].y - particles[second].y;
+
+          const distance =
+            Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+          if (distance < 95) {
+            context.beginPath();
+
+            context.moveTo(
+              particles[first].x,
+              particles[first].y
+            );
+
+            context.lineTo(
+              particles[second].x,
+              particles[second].y
+            );
+
+            context.strokeStyle =
+              `rgba(114, 247, 202, ${0.16 * (1 - distance / 95)})`;
+
+            context.lineWidth = 0.8;
+            context.stroke();
+          }
+        }
+      }
+
+      animationFrame = requestAnimationFrame(drawNetwork);
+    }
+
+    resizeCanvas();
+    drawNetwork();
+
+    window.addEventListener("resize", () => {
+      cancelAnimationFrame(animationFrame);
+      resizeCanvas();
+      drawNetwork();
+    });
+  </script>
+
+</body>
+</html>
